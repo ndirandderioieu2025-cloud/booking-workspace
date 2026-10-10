@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { sendBookingConfirmationEmail } from "@/lib/email/booking-confirmation";
 import { createClient } from "@/lib/supabase/server";
 import { firstReservationRow, reservationToBooking, type ReservationRow } from "@/lib/supabase/reservations";
+import { getWorkspace } from "@/lib/workspaces";
 
 const validPaymentMethods = new Set(["free", "pay-online", "pay-at-venue"]);
 
@@ -52,5 +54,23 @@ export async function POST(request: NextRequest) {
   }
   const row = firstReservationRow(data);
   if (!row) return NextResponse.json({ error: "The reservation was not returned by the database." }, { status: 500 });
-  return NextResponse.json({ booking: reservationToBooking(row) }, { status: 201 });
+  const booking = reservationToBooking(row);
+  const workspace = getWorkspace(booking.workspaceSlug);
+
+  if (user.email && workspace) {
+    try {
+      await sendBookingConfirmationEmail({
+        recipient: user.email,
+        workspaceName: workspace.name,
+        booking,
+      });
+    } catch {
+      // The reservation is already confirmed. Email delivery must never roll it back.
+      console.error(`[booking-email] Unexpected failure for ${booking.reference}.`);
+    }
+  } else {
+    console.warn(`[booking-email] Missing recipient or workspace for ${booking.reference}; confirmation email skipped.`);
+  }
+
+  return NextResponse.json({ booking }, { status: 201 });
 }
