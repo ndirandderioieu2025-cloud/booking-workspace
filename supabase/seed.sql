@@ -1,0 +1,103 @@
+-- The ten fictional Madrid listings used by the Booking Workspace prototype.
+-- Safe to run more than once: records are matched by slug and updated.
+
+insert into public.workspaces (
+  slug, name, workspace_type, neighborhood, city, address, image_path, description,
+  price_per_hour, price_unit, capacity, sample_score, recommended_rank,
+  open_time, close_time, open_days, amenities, facilities, payment_methods,
+  purchase_condition, cancellation_policy, cancellation_hours
+)
+values
+  ('luz-de-barrio-cafe', 'Luz de Barrio Café', 'cafe', 'Malasaña', 'Madrid', 'Calle de la Brisa, 18, Malasaña, Madrid', '/images/hero-workspace.jpg',
+   'A warm neighbourhood café with generous communal tables, reliable Wi-Fi and plenty of daylight for a relaxed working session.',
+   2.50, 'person', 10, 4.7, 1, '08:30', '20:00', array[1,2,3,4,5,6,0],
+   '{"wifi":true,"outlets":true,"quiet":false,"foodDrinks":true,"indoor":true,"outdoor":false,"meetingRooms":false}',
+   array['Fast Wi-Fi','Power outlets','Communal tables','Coffee and food','Natural light'], array['pay-at-venue'],
+   'One drink purchase is required during the reservation.', 'Free cancellation up to 2 hours before the start time.', 2),
+
+  ('nido-study-club', 'Nido Study Club', 'study', 'Moncloa', 'Madrid', 'Pasaje del Olmo, 7, Moncloa, Madrid', '/images/quiet-study.jpg',
+   'A focused study room with individual desks, desk lamps and acoustic treatment close to Madrid''s university district.',
+   3.00, 'person', 18, 4.8, 2, '08:00', '22:00', array[1,2,3,4,5,6,0],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":false,"indoor":true,"outdoor":false,"meetingRooms":false}',
+   array['Silent zone','Individual desk','Task light','Power outlets','Fast Wi-Fi'], array['pay-online','pay-at-venue'],
+   null, 'Free cancellation up to 4 hours before the start time.', 4),
+
+  ('sala-cibeles', 'Sala Cibeles', 'meeting-room', 'Centro', 'Madrid', 'Calle del Horizonte, 12, Centro, Madrid', '/images/meeting-room.jpg',
+   'A private six-person meeting room with a large display, video-call equipment and a calm professional setting.',
+   12.00, 'room', 6, 4.6, 4, '09:00', '20:00', array[1,2,3,4,5,6],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":false,"indoor":true,"outdoor":false,"meetingRooms":true}',
+   array['Private room','Display screen','Video calls','Whiteboard','Fast Wi-Fi'], array['pay-online'],
+   null, 'Free cancellation up to 12 hours before the start time.', 12),
+
+  ('patio-norte-cafe', 'Patio Norte Café', 'cafe', 'Chamberí', 'Madrid', 'Patio de la Luz, 4, Chamberí, Madrid', '/images/patio-norte.jpg',
+   'A plant-filled covered courtyard with spacious tables and free reservations for customers purchasing a drink.',
+   0.00, 'person', 8, 4.5, 5, '09:00', '19:30', array[1,2,3,4,5,6,0],
+   '{"wifi":true,"outlets":true,"quiet":false,"foodDrinks":true,"indoor":true,"outdoor":true,"meetingRooms":false}',
+   array['Free reservation','Wi-Fi','Power outlets','Covered courtyard','Coffee and food'], array['free'],
+   'A minimum purchase of one drink per person is required.', 'Cancel at any time before arrival.', 0),
+
+  ('mesa-clara-lavapies', 'Mesa Clara Lavapiés', 'cafe', 'Lavapiés', 'Madrid', 'Calle del Jazmín, 21, Lavapiés, Madrid', '/images/mesa-clara.jpg',
+   'An informal community café with large shared tables, good natural light and free work-friendly reservations.',
+   0.00, 'person', 6, 4.4, 7, '10:00', '18:30', array[1,2,3,4,5,6],
+   '{"wifi":true,"outlets":false,"quiet":false,"foodDrinks":true,"indoor":true,"outdoor":false,"meetingRooms":false}',
+   array['Free reservation','Wi-Fi','Communal tables','Coffee and snacks','Natural light'], array['free'],
+   'No minimum purchase is required. Food and drinks are available optionally.', 'Cancel at any time before arrival.', 0),
+
+  ('retiro-reading-room', 'Retiro Reading Room', 'study', 'Retiro', 'Madrid', 'Galería del Parque, 9, Retiro, Madrid', '/images/retiro-reading-room.jpg',
+   'A premium silent reading room with acoustic desk dividers, personal lamps and a carefully controlled study environment.',
+   5.00, 'person', 24, 4.9, 3, '08:00', '21:30', array[1,2,3,4,5,6,0],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":false,"indoor":true,"outdoor":false,"meetingRooms":false}',
+   array['Silent room','Acoustic divider','Personal lamp','Fast Wi-Fi','Secure lockers'], array['pay-online'],
+   null, 'Free cancellation up to 6 hours before the start time.', 6),
+
+  ('prisma-coworking', 'Prisma Coworking', 'coworking', 'Salamanca', 'Madrid', 'Calle Prisma, 15, Salamanca, Madrid', '/images/prisma-coworking.jpg',
+   'A bright shared-office floor with ergonomic desks, acoustic panels and everything needed for a productive workday.',
+   6.00, 'desk', 30, 4.7, 6, '08:00', '22:00', array[1,2,3,4,5,6],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":true,"indoor":true,"outdoor":false,"meetingRooms":true}',
+   array['Ergonomic desk','High-speed Wi-Fi','Phone booths','Kitchen','Meeting rooms'], array['pay-online','pay-at-venue'],
+   null, 'Free cancellation up to 6 hours before the start time.', 6),
+
+  ('nave-sur-cowork', 'Nave Sur Cowork', 'coworking', 'Arganzuela', 'Madrid', 'Travesía del Taller, 6, Arganzuela, Madrid', '/images/nave-sur.jpg',
+   'A practical converted workshop offering affordable shared desks, strong Wi-Fi and plenty of space for longer sessions.',
+   4.50, 'desk', 36, 4.5, 8, '08:30', '21:00', array[1,2,3,4,5,6],
+   '{"wifi":true,"outlets":true,"quiet":false,"foodDrinks":true,"indoor":true,"outdoor":false,"meetingRooms":true}',
+   array['Shared desk','Fast Wi-Fi','Power strip','Kitchen','Bike storage'], array['pay-online','pay-at-venue'],
+   null, 'Free cancellation up to 4 hours before the start time.', 4),
+
+  ('circulo-serrano', 'Círculo Serrano', 'coworking', 'Salamanca', 'Madrid', 'Paseo del Círculo, 28, Salamanca, Madrid', '/images/circulo-serrano.jpg',
+   'A refined quiet coworking lounge with spacious walnut desks, supportive seating and discreet professional facilities.',
+   9.00, 'desk', 20, 4.8, 9, '08:00', '21:00', array[1,2,3,4,5,6],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":true,"indoor":true,"outdoor":false,"meetingRooms":true}',
+   array['Premium desk','High-speed Wi-Fi','Quiet lounge','Coffee station','Phone booths'], array['pay-online'],
+   null, 'Free cancellation up to 12 hours before the start time.', 12),
+
+  ('atocha-team-room', 'Atocha Team Room', 'meeting-room', 'Atocha', 'Madrid', 'Plaza del Andén, 3, Atocha, Madrid', '/images/atocha-team-room.jpg',
+   'A compact private room for focused team sessions, equipped with a display, whiteboard and reliable video calling.',
+   10.00, 'room', 4, 4.6, 10, '09:00', '20:00', array[1,2,3,4,5],
+   '{"wifi":true,"outlets":true,"quiet":true,"foodDrinks":false,"indoor":true,"outdoor":false,"meetingRooms":true}',
+   array['Private room','Display screen','Whiteboard','Video calls','Air conditioning'], array['pay-online','pay-at-venue'],
+   null, 'Free cancellation up to 8 hours before the start time.', 8)
+on conflict (slug) do update set
+  name = excluded.name,
+  workspace_type = excluded.workspace_type,
+  neighborhood = excluded.neighborhood,
+  city = excluded.city,
+  address = excluded.address,
+  image_path = excluded.image_path,
+  description = excluded.description,
+  price_per_hour = excluded.price_per_hour,
+  price_unit = excluded.price_unit,
+  capacity = excluded.capacity,
+  sample_score = excluded.sample_score,
+  recommended_rank = excluded.recommended_rank,
+  open_time = excluded.open_time,
+  close_time = excluded.close_time,
+  open_days = excluded.open_days,
+  amenities = excluded.amenities,
+  facilities = excluded.facilities,
+  payment_methods = excluded.payment_methods,
+  purchase_condition = excluded.purchase_condition,
+  cancellation_policy = excluded.cancellation_policy,
+  cancellation_hours = excluded.cancellation_hours,
+  is_active = true,
+  updated_at = now();
